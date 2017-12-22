@@ -1,7 +1,5 @@
 #include "mes_types.h"
-//~ #include "graphics.h"
-//~ #include <uvsqgraphics.h>
-
+#include "deplacement.h"
 
 void initialiser_affichage(SLIDER S) {
 	init_graphics (50*S.L,50*S.H);
@@ -42,35 +40,35 @@ void afficher_murs(SLIDER S) {
 		
 		for(i=0;i<S.N;i++){
 			
-			S.p.x = S.Mur[i][0];
-			S.p.y = S.Mur[i][1];
+			S.mur.x = S.Mur[i][0];
+			S.mur.y = S.Mur[i][1];
 		
 			if(S.Mur[i][2]==0){
 			
-				p1.x=S.p.x+3;
-				p1.y=S.p.y+50;
-				draw_fill_rectangle(S.p,p1,bleu);
+				p1.x=S.mur.x+3;
+				p1.y=S.mur.y+50;
+				draw_fill_rectangle(S.mur,p1,bleu);
 			}
 				
 			if(S.Mur[i][2]==3){
 			
-				p1.x=S.p.x+50;
-				p1.y=S.p.y+3;
-				draw_fill_rectangle(S.p,p1,bleu);
+				p1.x=S.mur.x+50;
+				p1.y=S.mur.y+3;
+				draw_fill_rectangle(S.mur,p1,bleu);
 			}
 				
 			if(S.Mur[i][2]==6){
 			
-				p1.x=S.p.x+3;
-				p1.y=S.p.y-50;
-				draw_fill_rectangle(S.p,p1,bleu);
+				p1.x=S.mur.x+3;
+				p1.y=S.mur.y-50;
+				draw_fill_rectangle(S.mur,p1,bleu);
 			}
 				
 			if(S.Mur[i][2]==9){
 			
-				p1.x=S.p.x-50;
-				p1.y=S.p.y+3;
-				draw_fill_rectangle(S.p,p1,bleu);
+				p1.x=S.mur.x-50;
+				p1.y=S.mur.y+3;
+				draw_fill_rectangle(S.mur,p1,bleu);
 
 		}
 	}		
@@ -78,10 +76,8 @@ void afficher_murs(SLIDER S) {
 
 void afficher_le_slider(SLIDER S) {
 	
-	draw_fill_circle(S.p,25,bleu);
+		draw_fill_circle(S.p,25,bleu);
 		deplace_balle(S);
-
-	
 }
 
 void afficher_sortie(SLIDER S) {
@@ -90,152 +86,143 @@ void afficher_sortie(SLIDER S) {
 	
 	p1.x = 500;
 	p1.y = 0;
-	draw_fill_rectangle(S.p1,p1,rouge);
+	draw_fill_rectangle(S.sortie,p1,rouge);
 
+}
+
+void Affichage(SLIDER S){
+	
+	initialiser_affichage(S);
+	afficher_grille(S);
+	afficher_murs(S);
+	afficher_sortie(S);
+	afficher_le_slider(S);
+	
 }
 
 void RechargerEcran(SLIDER S){
 	
 			fill_screen(noir);
-			initialiser_affichage(S);
-			afficher_grille(S);
-			afficher_murs(S);
-			afficher_sortie(S);
-			draw_fill_circle(S.p,25,bleu);
+			//~ initialiser_affichage(S);
+			//~ afficher_grille(S);
+			//~ afficher_murs(S);
+			//~ afficher_sortie(S);
+			Affichage(S);
+			//~ draw_fill_circle(S.p,25,bleu);
 			
 		}
 		
-/*int ArretBalle(SLIDER S){
+void TerminerPartie(SLIDER S){
+	
+			POINT centre;
+			centre.x = 250;
+			centre.y = 250;
+			fill_screen(noir);
+			aff_pol_centre(" Partie Terminee ", 20, centre, rouge);
+			wait_escape();
+			
+			
+		}
+		
+void ArretBalleMurDroit(SLIDER S){
 	
 	int i;
-	int arret=1;
 	
 	for(i=0;i<S.N;i++){
 		
-		while(arret==1){
+		if(((S.p.x + 25) == (S.Mur[i][0])) && ((S.p.y - 25) == (S.Mur[i][1])) && ((S.Mur[i][2]) == 0 )){
 			
-		if(((S.p.x+25==S.Mur[i][0])&&(S.p.y-25))==((S.Mur[i][1])&&(S.Mur[i][2]==0))||((S.p.x+25==S.Mur[i][0])&&((S.p.y+25)==(S.Mur[i][1]))&&(S.Mur[i][2]==6))){
-			
-			arret = 0;
-			return arret;
 			printf("Il y a un mur a droite");
-			}	
+			deplace_balle(S);
+			
+			}
+			
+			else if(((S.p.x+25) == (S.Mur[i][0])) && ((S.p.y+25) == (S.Mur[i][1])) && ((S.Mur[i][2])==6)){	
+				
+				printf("Il y a un mur a droite");
+				deplace_balle(S);
 		}
 	}
-}*/
+}
 
-/*int Arrive(SLIDER S){
+void ArretBalleMurGauche(SLIDER S){
 	
-	int arrive = 0;
-		
-	if((S.p.x==S.p1.x)&&(S.p.y==S.p1.y)){
-		
-		printf("ARRIVE !");
-		arrive = 1;
-		return arrive;
-		}	
-}*/
-
-void deplace_balle(SLIDER S){
-	
-	printf(" entree dans deplace balle \n");
-	int reception = 0;
-	char touche = {0};
-	int fleche=0;
-	POINT clic;
 	int i;
 	
-	clic.x = 0;	clic.y = 0;	
-	
-	while( (S.p.x>=25) && (S.p.x<=475) && (S.p.y>=25) && (S.p.y<=475) ) {
+	for(i=0;i<S.N;i++){
 		
-	printf(" entree dans while \n");
-	
-	reception = wait_key_arrow_clic(&touche,&fleche,&clic);
-	
-	if(reception == 1){
-		
-		//if(Arrive(S)==0){
-		if((S.p.x!=475)&&(S.p.y!=25)){
-		
-		printf(" Entré dans le if \n");
-				
-			if(fleche == FLECHE_DROITE){
-				
-				printf(" Fleche droite \n");
-				
-				if(S.p.x<475){
-						
-					//if(ArretBalle(S)==0){
-					
-					S.p.x = S.p.x + 50;
-					RechargerEcran(S);
-					
-					}
-				}
-	
-		else if(fleche == FLECHE_GAUCHE){
-				
-				printf(" Fleche gauche \n");
-				
-				if(S.p.x>25){
-				
-					S.p.x = S.p.x - 50;
-					RechargerEcran(S);
-				
-				}
-			}
-		else if(fleche == FLECHE_HAUT){
-				
-				printf(" Fleche haut \n");
-				
-				if(S.p.y<475){
-				
-					S.p.y = S.p.y + 50;
-					RechargerEcran(S);
-				}
+		if(((S.p.x - 25) == (S.Mur[i][0])) && ((S.p.y - 25) == (S.Mur[i][1])) && ((S.Mur[i][2]) == 0 )){
+			
+			printf("Il y a un mur a gauche");
+			deplace_balle(S);
+			
 			}
 			
-		else if(fleche == FLECHE_BAS){
-				printf(" Fleche bas \n");
+			else if(((S.p.x-25) == (S.Mur[i][0])) && ((S.p.y+25) == (S.Mur[i][1])) && ((S.Mur[i][2])==6)){	
 				
-				if(S.p.y>25){
-				
-					S.p.y = S.p.y - 50;
-					RechargerEcran(S);
-				
-				}
-			}
-		}
-		
-		else{
-			
-			printf("Arrivé !");
-			//RechargerEcran(S);
+				printf("Il y a un mur a gauche");
+				deplace_balle(S);
 		}
 	}
+}
 
-		else if (reception == 2) {
-			
-			
-			printf(" Touche \n");
-		}
-			else if (reception == 3) {
-				
-				printf(" Clic \n");
-			}
+
+void ArretBalleMurBas(SLIDER S){
+	
+	int i;
+	
+	for(i=0;i<S.N;i++){
 		
-				else 
+		if(((S.p.x - 25) == (S.Mur[i][0])) && ((S.p.y - 25) == (S.Mur[i][1])) && ((S.Mur[i][2]) == 3 )){
+			
+			printf("Il y a un mur en bas");
+			deplace_balle(S);
+			
+			}
+			
+			else if(((S.p.x+25) == (S.Mur[i][0])) && ((S.p.y-25) == (S.Mur[i][1])) && ((S.Mur[i][2])==9)){	
 				
-				{
-					
-				printf(" Aucunne touche \n");	
-					
-						}
-	
-				}
+				printf("Il y a un mur en bas");
+				deplace_balle(S);
 		}
+	}
+}
+
+
+void ArretBalleMurHaut(SLIDER S){
 	
+	int i;
+	
+	for(i=0;i<S.N;i++){
+		
+		if(((S.p.x - 25) == (S.Mur[i][0])) && ((S.p.y + 25) == (S.Mur[i][1])) && ((S.Mur[i][2]) == 3 )){
+			
+			printf("Il y a un mur en haut");
+			deplace_balle(S);
+			
+			}
+			
+			else if(((S.p.x+25) == (S.Mur[i][0])) && ((S.p.y+25) == (S.Mur[i][1])) && ((S.Mur[i][2])==9)){	
+				
+				printf("Il y a un mur en haut");
+				deplace_balle(S);
+		}
+	}
+}
+
+
+void Arrive(SLIDER S){
+	
+	if((S.p.x==S.sortie.x+25)&&(S.p.y==S.sortie.y-25)){
+			
+			printf("Bien Joué !");
+			S.N=0;
+			TerminerPartie(S);
+			//~ exit(0);
+			
+		}
+
+}
 
 void finir_affichage(SLIDER S) {
 	wait_escape();

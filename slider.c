@@ -1,21 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
 
 #include "mes_types.h"
-#include "lire_ecrire.h"
-#include "afficher.h"
+
 
 int main (int argc, char*argv[]) {
 	printf("Debut slider\n");
 
 	SLIDER S;
 	S = lire_fichier(argv[1]);
+	lancerPartie(S);
 	
-	initialiser_affichage(S);
-	afficher_grille(S);
-	afficher_murs(S);
-	afficher_sortie(S);
-	afficher_le_slider(S);
+	//~ 
 
 	printf("Fin slider\n");
 	

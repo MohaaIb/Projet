@@ -1,17 +1,19 @@
-#include <uvsqgraphics.h>
-#define TAILLE_CASE 50
 #ifndef _MES_TYPESH
 
-struct slider {
-	int L,H; // Largeur et hauteur de la grille
-	POINT p; // La balle et origine du mur
-	POINT p1; // La sortie 
-	int N; // Nombre de Mur
-	int Mur[300][3]; // Tableau 
-	
-};
 
-typedef struct slider SLIDER;
+#include <stdio.h>
+#include <stdlib.h>
+
+
+#include <uvsqgraphics.h>
+#include "slider.h"
+#include "afficher.h"
+#include "lire_ecrire.h"
+#include "deplacement.h"
+
+#define TAILLE_CASE 50
+
+
 
 #endif
 	

@@ -2,16 +2,30 @@
 
 void initialiser_affichage(SLIDER S);
 
-//~ void afficher_slider (SLIDER S);
+void afficher_grille(SLIDER S);
 
-void finir_affichage(SLIDER S);
+void afficher_murs(SLIDER S);
 
-void deplace_balle(SLIDER S);
+void afficher_le_slider(SLIDER S);
+
+void afficher_sortie(SLIDER S);
+
+void Affichage(SLIDER S);
 
 void RechargerEcran(SLIDER S);
 
-void ArretBalle(SLIDER S);
+void TerminerPartie(SLIDER S);
 
-int Arrive(SLIDER S);
+void ArretBalleMurDroit(SLIDER S);
+
+void ArretBalleMurGauche(SLIDER S);
+
+void ArretBalleMurBas(SLIDER S);
+
+void ArretBalleMurHaut(SLIDER S);
+
+void Arrive(SLIDER S);
+
+void finir_affichage(SLIDER S);
 
 #endif

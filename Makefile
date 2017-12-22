@@ -4,21 +4,27 @@ test: clean slider
 	./slider niveau_01.slider
 
 # Edition de liens
-slider: slider.o lire_ecrire.o afficher.o
-	gcc slider.o lire_ecrire.o afficher.o -o slider -luvsqgraphics `sdl-config --libs` -lm -lSDL_ttf
+slider: slider.o lire_ecrire.o afficher.o deplacement.o
+	gcc slider.o lire_ecrire.o afficher.o deplacement.o -o slider -luvsqgraphics `sdl-config --libs` -lm -lSDL_ttf
 
 # Compilation
-slider.o: slider.c mes_types.h lire_ecrire.h
+slider.o: slider.c mes_types.h
 	gcc -c -Wall `sdl-config --cflags` slider.c
 
 # Compilation
-lire_ecrire.o: lire_ecrire.c
+lire_ecrire.o: lire_ecrire.c mes_types.h
 	gcc -c -Wall `sdl-config --cflags` lire_ecrire.c
 
 # Compilation
-afficher.o: afficher.c
+afficher.o: afficher.c mes_types.h
 #	gcc -c -Wall   -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT  afficher.c
 	gcc -c -Wall `sdl-config --cflags` afficher.c
+
+# Compilation
+deplacement.o: deplacement.c mes_types.h
+#	gcc -c -Wall   -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT  afficher.c
+	gcc -c -Wall `sdl-config --cflags` deplacement.c
+
 
 editeur:
 	geany Makefile mes_types.h slider.c afficher.c afficher.h &
