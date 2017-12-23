@@ -100,14 +100,16 @@ void Affichage(SLIDER S){
 	
 }
 
-void RechargerEcran(SLIDER S){
+void RechargerEcranAvant(SLIDER S){
 	
-			fill_screen(noir);
-			initialiser_affichage(S);
-			afficher_grille(S);
-			afficher_murs(S);
-			afficher_sortie(S);
+			draw_fill_circle(S.p,25,noir);
+			
+		}
+		
+void RechargerEcranApres(SLIDER S){
+			
 			draw_fill_circle(S.p,25,bleu);
+			afficher_murs(S);
 			
 		}
 		

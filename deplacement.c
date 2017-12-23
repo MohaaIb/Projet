@@ -19,13 +19,13 @@ void deplace_balle(SLIDER S){
 	int i;
 	
 	clic.x = 0;	clic.y = 0;	
-	
+
 	while( (S.p.x>=25) && (S.p.x<=475) && (S.p.y>=25) && (S.p.y<=475) ) {
 		
 		printf(" entree dans while \n");
 		
 		reception = wait_key_arrow_clic(&touche,&fleche,&clic);
-			
+		
 		Arrive(S);
 	
 		if(reception == 1){
@@ -38,17 +38,19 @@ void deplace_balle(SLIDER S){
 				printf(" Fleche droite \n");	
 					
 				if(S.p.x + 50 == S.sortie.x+25){
-				
+					
+					RechargerEcranAvant(S);
 					S.p.x = S.p.x + 50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 					Arrive(S);
 		
 				}
 				
 				else if(S.p.x<475){
 					
+					RechargerEcranAvant(S);
 					S.p.x = S.p.x + 50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 					
 					}
 				}
@@ -62,9 +64,10 @@ void deplace_balle(SLIDER S){
 				printf(" Fleche gauche \n");
 				
 				if(S.p.x>25){
-				
+					
+					RechargerEcranAvant(S);
 					S.p.x = S.p.x - 50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 				
 				}
 			}
@@ -77,9 +80,10 @@ void deplace_balle(SLIDER S){
 				printf(" Fleche haut \n");
 				
 				if(S.p.y<475){
-				
+					
+					RechargerEcranAvant(S);
 					S.p.y = S.p.y + 50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 				}
 			}
 		}
@@ -92,16 +96,18 @@ void deplace_balle(SLIDER S){
 				printf(" Fleche bas \n");
 				
 				if(S.p.y - 50 == S.sortie.y-25){
-				
+					
+					RechargerEcranAvant(S);
 					S.p.y = S.p.y - 50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 					Arrive(S);
 		
 				}
 				else if(S.p.y>25){
 					
+					RechargerEcranAvant(S);
 					S.p.y = S.p.y -50;
-					RechargerEcran(S);
+					RechargerEcranApres(S);
 					
 					}
 				}
