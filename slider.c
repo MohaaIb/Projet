@@ -7,9 +7,8 @@ int main (int argc, char*argv[]) {
 
 	SLIDER S;
 	S = lire_fichier(argv[1]);
-	lancerPartie(S);
 	
-	//~ 
+	Affichage(S);
 
 	printf("Fin slider\n");
 	

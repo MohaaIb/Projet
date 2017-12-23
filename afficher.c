@@ -84,8 +84,8 @@ void afficher_sortie(SLIDER S) {
 	
 	POINT p1;
 	
-	p1.x = 500;
-	p1.y = 0;
+	p1.x = S.sortie.x + 50;
+	p1.y = S.sortie.y - 50;
 	draw_fill_rectangle(S.sortie,p1,rouge);
 
 }
@@ -103,12 +103,11 @@ void Affichage(SLIDER S){
 void RechargerEcran(SLIDER S){
 	
 			fill_screen(noir);
-			//~ initialiser_affichage(S);
-			//~ afficher_grille(S);
-			//~ afficher_murs(S);
-			//~ afficher_sortie(S);
-			Affichage(S);
-			//~ draw_fill_circle(S.p,25,bleu);
+			initialiser_affichage(S);
+			afficher_grille(S);
+			afficher_murs(S);
+			afficher_sortie(S);
+			draw_fill_circle(S.p,25,bleu);
 			
 		}
 		
@@ -216,9 +215,8 @@ void Arrive(SLIDER S){
 	if((S.p.x==S.sortie.x+25)&&(S.p.y==S.sortie.y-25)){
 			
 			printf("Bien Joué !");
-			S.N=0;
 			TerminerPartie(S);
-			//~ exit(0);
+			exit(0);
 			
 		}
 

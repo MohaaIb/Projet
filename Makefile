@@ -1,7 +1,14 @@
 NOM=PROJET_IN301
 
-test: clean slider
+niveau1: clean slider
 	./slider niveau_01.slider
+	
+niveau2: clean slider
+	./slider niveau_02.slider
+	
+niveau3: clean slider
+	./slider niveau_03.slider
+	
 
 # Edition de liens
 slider: slider.o lire_ecrire.o afficher.o deplacement.o
