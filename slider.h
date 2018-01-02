@@ -9,7 +9,7 @@ struct slider {
 	//char * nomFichier; // nom du fichier à jouer
 	POINT sortie; // La sortie 
 	int N; // Nombre de Mur
-	int Mur[300][3]; // Tableau[Nb de Mur][ 0=Position x; 1=Position y; 2=Direction Mur]
+	int Mur[900][3]; // Tableau[Nb de Mur][ 0=Position x; 1=Position y; 2=Direction Mur]
 	
 };
 

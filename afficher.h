@@ -12,7 +12,9 @@ void afficher_sortie(SLIDER S);
 
 void Affichage(SLIDER S);
 
-void RechargerEcran(SLIDER S);
+void RechargerEcranAvant(SLIDER S);
+
+void RechargerEcranApres(SLIDER S);
 
 void TerminerPartie(SLIDER S);
 

@@ -32,7 +32,7 @@ void deplace_balle(SLIDER S){
 				
 			if(fleche == FLECHE_DROITE){
 				
-				for(i=0;i<10;i++){
+				for(i=0;i<S.L;i++){
 					
 				ArretBalleMurDroit(S);
 				printf(" Fleche droite \n");	
@@ -58,7 +58,7 @@ void deplace_balle(SLIDER S){
 	
 		else if(fleche == FLECHE_GAUCHE){
 				
-				for(i=0;i<10;i++){
+				for(i=0;i<S.L;i++){
 					
 				ArretBalleMurGauche(S);
 				printf(" Fleche gauche \n");
@@ -74,7 +74,7 @@ void deplace_balle(SLIDER S){
 		}
 		else if(fleche == FLECHE_HAUT){
 				
-				for(i=0;i<10;i++){
+				for(i=0;i<S.H;i++){
 					
 				ArretBalleMurHaut(S);
 				printf(" Fleche haut \n");
@@ -90,7 +90,7 @@ void deplace_balle(SLIDER S){
 			
 		else if(fleche == FLECHE_BAS){
 				
-				for(i=0;i<10;i++){
+				for(i=0;i<S.H;i++){
 					
 				ArretBalleMurBas(S);
 				printf(" Fleche bas \n");
